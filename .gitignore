@@ -1,0 +1,6 @@
+cat > .gitignore <<'EOF'
+lab/clab-*/
+.env
+.venv/
+__pycache__/
+EOF
