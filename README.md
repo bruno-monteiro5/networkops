@@ -81,4 +81,3 @@ python automation/compare_configs.py r1
 | Network Automation | Core features completed |
 | Automated Testing | In progress |
 | Zabbix Monitoring & Alerts | Planned |
-

@@ -5,19 +5,23 @@ topology:
   nodes:
     r1:
       kind: frr
-      image: quay.io/frrouting/frr:containerlab-10.7.1
+      image: networkops/frr-snmp:10.7.1
       startup-config: configs/r1/frr.conf
       enforce-startup-config: true
       daemons:
         - ospfd
+      exec:
+        - snmpd -C -c /etc/snmp/snmpd.conf -Lf /tmp/snmpd.log
 
     r2:
       kind: frr
-      image: quay.io/frrouting/frr:containerlab-10.7.1
+      image: networkops/frr-snmp:10.7.1
       startup-config: configs/r2/frr.conf
       enforce-startup-config: true
       daemons:
         - ospfd
+      exec:
+        - snmpd -C -c /etc/snmp/snmpd.conf -Lf /tmp/snmpd.log
 
     
     host1:
