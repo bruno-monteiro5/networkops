@@ -1,6 +1,19 @@
-cat > .gitignore <<'EOF'
+# Containerlab generated files
 lab/clab-*/
-.env
+
+# Python
 .venv/
 __pycache__/
-EOF
+*.pyc
+.pytest_cache/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Network configuration backups
+automation/backups/
+
+# Editor and OS files
+.DS_Store

@@ -1,94 +1,84 @@
-
 # NetworkOps
 
 **Network Automation & Monitoring Lab**
 
-A personal networking project focused on building, automating, and monitoring a virtual enterprise network using open-source technologies.
+A personal Network Engineering project focused on building and automating a virtual enterprise network using open-source technologies.
 
-## Project Objectives
-
-- Build a reproducible virtual network infrastructure.
-- Configure routing and remote device management.
-- Automate configuration backups using Python and SSH.
-- Monitor devices and interfaces using Zabbix.
-- Detect network failures and generate alerts.
-
-## Technology Stack
-
-- Containerlab
-- FRRouting (FRR)
-- Docker
-- Linux
-- Python (planned)
-- Zabbix (planned)
+The goal is to demonstrate practical skills in **network infrastructure, dynamic routing, Python automation, and network monitoring**.
 
 ## Network Topology
 
-Host1 --- R1 --- R2 --- Host2
+The lab consists of two FRRouting routers and two Linux hosts connected across separate LANs.
 
-| Device | Interface | IPv4 Address |
-|--------|-----------|--------------|
-| R1 | eth1 | 10.0.12.1/30 |
-| R1 | eth2 | 192.168.10.1/24 |
-| R2 | eth1 | 10.0.12.2/30 |
-| R2 | eth2 | 192.168.20.1/24 |
-| Host1 | eth1 | 192.168.10.10/24 |
-| Host2 | eth1 | 192.168.20.10/24 |
+`Host1 ── R1 ── OSPF ── R2 ── Host2`
 
-## Current Status
+- **LAN 1:** `192.168.10.0/24`
+- **Inter-router link:** `10.0.12.0/30`
+- **LAN 2:** `192.168.20.0/24`
+- **Routing:** OSPF Area 0
 
-### Implemented
+The infrastructure is deployed using Containerlab and Docker.
 
-- Two virtual FRRouting routers
-- Two Linux hosts
-- Point-to-point router connectivity
-- Two separate LANs
-- Persistent router configurations
-- Basic ICMP connectivity testing
+## Technologies
 
-### Planned
+**Networking:** FRRouting, OSPF, IPv4, SSH
 
-- OSPF dynamic routing
-- SSH-based network automation
-- Automated configuration backups
-- Configuration change detection
-- Zabbix monitoring dashboard
-- Failure detection and alerting
-- Automated tests
+**Automation:** Python, Paramiko, difflib
 
-## Quick Start
+**Infrastructure:** Linux, Docker, Containerlab
 
-Requirements:
-- Linux environment
-- Docker Engine
-- Containerlab
+**Monitoring (planned):** Zabbix, SNMP
 
-Deploy the topology:
+## Features
+
+- Reproducible virtual network infrastructure.
+- Dynamic routing with OSPF and inter-LAN connectivity.
+- Secure remote management using SSH key authentication.
+- Automated router configuration backups using Python.
+- Configuration change detection and comparison.
+- Network monitoring and failure alerts *(planned)*.
+
+## Getting Started
+
+**Requirements:** Linux/WSL2, Docker, Containerlab and Python 3.
+
+Clone the repository:
 
 ```bash
-sudo containerlab deploy -t lab/topology.clab.yml
+git clone https://github.com/bruno-monteiro5/networkops.git
+cd networkops
 ```
 
-Inspect the lab:
+Deploy the virtual network:
 
 ```bash
-sudo containerlab inspect -t lab/topology.clab.yml
+containerlab deploy -t lab/topology.clab.yml
 ```
 
-Test router connectivity:
+Set up the Python environment:
 
 ```bash
-sudo docker exec clab-networkops-r1 ping -c 3 10.0.12.2
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-Destroy the lab:
+After configuring SSH key authentication and trusted host keys, run the automation scripts:
 
 ```bash
-sudo containerlab destroy -t lab/topology.clab.yml
+python automation/check_ssh.py
+python automation/run_commands.py
+python automation/backup_configs.py
+python automation/compare_configs.py r1
 ```
 
 ## Project Status
 
-Phase 1: Virtual infrastructure implemented and connectivity validated.
+| Phase | Status |
+|---|---|
+| Virtual Network Infrastructure | Completed |
+| OSPF Routing & SSH Management | Completed |
+| Network Automation | Core features completed |
+| Automated Testing | In progress |
+| Zabbix Monitoring & Alerts | Planned |
 
-This project is under active development.
