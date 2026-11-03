@@ -23,7 +23,7 @@ Host1 (192.168.10.10) -- R1 -- [eth1 / OSPF] -- R2 -- Host2 (192.168.20.10)
 From the repository root, run the **read-only preflight**:
 
 ```bash
-python automation/test_network_failure.py
+python automation/network_failure.py
 ```
 
 It checks that R1 `eth1` is up, the OSPF neighbor is `Full`, the remote OSPF route `192.168.20.0/24` exists, and Host1 can ping Host2.
@@ -31,7 +31,7 @@ It checks that R1 `eth1` is up, the OSPF neighbor is `Full`, the remote OSPF rou
 To run the **interactive failure-and-recovery test**:
 
 ```bash
-python automation/test_network_failure.py --run
+python automation/network_failure.py --run
 ```
 
 Type `FAIL` when prompted to confirm the deliberate disruption. The script then:
